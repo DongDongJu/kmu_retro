@@ -1,0 +1,3 @@
+*.swp
+agent/__pycache__
+agent/results
