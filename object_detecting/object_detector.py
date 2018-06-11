@@ -44,7 +44,6 @@ class METADATA(Structure):
 
     
 
-#lib = CDLL("/home/pjreddie/documents/darknet/libdarknet.so", RTLD_GLOBAL)
 lib = CDLL("libdarknet.so", RTLD_GLOBAL)
 lib.network_width.argtypes = [c_void_p]
 lib.network_width.restype = c_int
@@ -143,11 +142,12 @@ def detect(net, meta, image, thresh=.5, hier_thresh=.5, nms=.45):
     return res
 
 def get_obstacle_position(frame):
-    net = load_net("cfg/yolov2-tiny.cfg", "cfg/yolov2-tiny_500000.weights", 0)
-    meta = load_meta("data/obj.data")
-#    r = detect(net, meta, "/home/ho/workspace/darknet/8.jpg")
-    r = detect(net, meta, "/home/ho/workspace/Yolo_mark/x64/Release/data/img/3739.jpg")
-    print(r)
+    net = load_net(bytes("cfg/yolov2-tiny.cfg",encoding='utf-8'),bytes("cfg/yolov2-tiny_500000.weights",encoding='utf-8'), 0)
+    meta = load_meta(bytes("data/obj.data",encoding='utf-8'))
+    r = detect(net, meta, bytes("/home/ho/workspace/Yolo_mark/x64/Release/data/img/3739.jpg",encoding='utf-8'))
+    print(r[0])
+    print(r[1])
+    print(r[2])
 
 
 if __name__ == "__main__":
