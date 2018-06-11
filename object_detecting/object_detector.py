@@ -141,16 +141,14 @@ def detect(net, meta, image, thresh=.5, hier_thresh=.5, nms=.45):
     free_image(im)
     free_detections(dets, num)
     return res
-    
-if __name__ == "__main__":
-    #net = load_net("cfg/densenet201.cfg", "/home/pjreddie/trained/densenet201.weights", 0)
-    #im = load_image("data/wolf.jpg", 0, 0)
-    #meta = load_meta("cfg/imagenet1k.data")
-    #r = classify(net, meta, im)
-    #print r[:10]
-    net = load_net("cfg/yolov2-tiny.cfg", "cfg/yolov2-tiny_10000.weights", 0)
-    meta = load_meta("data/obj.data")
-    r = detect(net, meta, "/home/ho/workspace/darknet/8.jpg")
-    print r
-    
 
+def get_obstacle_position(frame):
+    net = load_net("cfg/yolov2-tiny.cfg", "cfg/yolov2-tiny_500000.weights", 0)
+    meta = load_meta("data/obj.data")
+#    r = detect(net, meta, "/home/ho/workspace/darknet/8.jpg")
+    r = detect(net, meta, "/home/ho/workspace/Yolo_mark/x64/Release/data/img/3739.jpg")
+    print(r)
+
+
+if __name__ == "__main__":
+    get_obstacle_position(frame=0)
