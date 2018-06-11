@@ -2,3 +2,6 @@
 agent/__pycache__
 agent/results
 agent/results_first
+object_detecting/jerk.py
+object_detecting/scenario.json
+object_detecting/__pycache__

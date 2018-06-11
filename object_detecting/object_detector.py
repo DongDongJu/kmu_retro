@@ -142,13 +142,15 @@ def detect(net, meta, image, thresh=.5, hier_thresh=.5, nms=.45):
     return res
 
 def get_obstacle_position(frame):
+    num_of_obj=0
+    obj_list=[]
     net = load_net(bytes("cfg/yolov2-tiny.cfg",encoding='utf-8'),bytes("cfg/yolov2-tiny_500000.weights",encoding='utf-8'), 0)
     meta = load_meta(bytes("data/obj.data",encoding='utf-8'))
-    r = detect(net, meta, bytes("/home/ho/workspace/Yolo_mark/x64/Release/data/img/3739.jpg",encoding='utf-8'))
-    print(r[0])
-    print(r[1])
-    print(r[2])
+    r = detect(net, meta, bytes(frame,encoding='utf-8'))
+    for obj in r:
+        if obj[1] > 0.95:
+            num_of_obj+=1
+            obj_list.append([obj[0].decode("utf-8"),obj[2][0],obj[2][1],obj[2][2],obj[2][3]])
+            # name , x , y , w , h 
+    return obj_list
 
-
-if __name__ == "__main__":
-    get_obstacle_position(frame=0)
